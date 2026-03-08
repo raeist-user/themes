@@ -23,6 +23,11 @@ header{flex-shrink:0;height:50px;padding:0 14px;border-bottom:1px solid #1e1e22;
 .hdr-btn.ok{background:#0f1f0f;border-color:#2ecc71;color:#2ecc71;}
 .hdr-btn.accent{background:#0d1a2e;border-color:#3b82f6;color:#3b82f6;}
 .hdr-btn.accent:hover{background:#112240;border-color:#60a5fa;color:#60a5fa;}
+.discord-btn{background:#0e0f1f;border-color:#5865f2;color:#5865f2;text-decoration:none;}
+.discord-btn:hover{background:#151629;border-color:#7983f5;color:#7983f5;}
+.donate-btn{background:#1f1208;border-color:#e2b714;color:#e2b714;text-decoration:none;}
+.donate-btn:hover{background:#2a1a0a;border-color:#f0cc40;color:#f0cc40;}
+#donate-overlay.open{display:flex!important;}
 .hdr-divider{width:1px;height:18px;background:#1e1e22;flex-shrink:0;}
 .hist-badge{background:#1a1a1f;color:#444;font-size:7px;padding:1px 4px;border-radius:3px;min-width:14px;text-align:center;}
 
@@ -45,7 +50,8 @@ header{flex-shrink:0;height:50px;padding:0 14px;border-bottom:1px solid #1e1e22;
 
 /* ── PREVIEW ── */
 #preview-wrap{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden;}
-#preview-tabs{flex-shrink:0;display:flex;padding:10px 12px 0;background:#0d0d0f;gap:2px;}
+#preview-tabs{flex-shrink:0;display:flex;align-items:flex-end;padding:10px 12px 0;background:#0d0d0f;gap:2px;}
+.tab-history-btns{margin-left:auto;display:flex;gap:4px;padding-bottom:2px;align-items:center;}
 .ptab{padding:6px 14px;font-size:9px;letter-spacing:.06em;cursor:pointer;border-radius:6px 6px 0 0;border:1px solid transparent;color:#444;transition:all .15s;user-select:none;}
 .ptab:hover{color:#888;}
 .ptab.active{color:#ddd;border-color:#2a2a2e;border-bottom-color:#141416;background:#141416;}
@@ -322,6 +328,7 @@ header{flex-shrink:0;height:50px;padding:0 14px;border-bottom:1px solid #1e1e22;
   .logo-sub{display:none;}
   .hdr-btn{padding:5px 6px;font-size:8px;}
   .btn-txt{display:none;}
+  .new-btn-txt{display:inline!important;}
   .hist-badge{min-width:12px;}
   .hdr-divider{margin:0 1px;}
   .p-sidebar{width:85px;}
@@ -343,13 +350,18 @@ header{flex-shrink:0;height:50px;padding:0 14px;border-bottom:1px solid #1e1e22;
       </div>
     </div>
     <div class="hdr-actions">
-      <button class="hdr-btn" id="undo-btn" onclick="undo()" disabled>↩ <span class="btn-txt">UNDO</span> <span class="hist-badge" id="undo-badge">0</span></button>
-      <button class="hdr-btn" id="redo-btn" onclick="redo()" disabled>↪ <span class="btn-txt">REDO</span> <span class="hist-badge" id="redo-badge">0</span></button>
-      <div class="hdr-divider"></div>
-      <button class="hdr-btn" onclick="newProject()" title="Start fresh">✦ <span class="btn-txt">NEW</span></button>
+      <button class="hdr-btn" onclick="newProject()" title="Start fresh">✦ <span class="btn-txt new-btn-txt">NEW</span></button>
       <button class="hdr-btn accent" onclick="openProjects()">📁 <span class="btn-txt">PROJECTS</span></button>
       <div class="hdr-divider"></div>
       <button class="hdr-btn" id="exp-btn" onclick="exportCSS()"><span id="exp-ico">⎘</span> <span id="exp-lbl">EXPORT</span></button>
+      <div class="hdr-divider"></div>
+      <a class="hdr-btn discord-btn" href="https://discord.gg/9W9HzMPb4" target="_blank" rel="noopener" title="Join our Discord">
+        <svg width="11" height="11" viewBox="0 0 71 55" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M60.105 4.898A58.55 58.55 0 0 0 45.653.415a.22.22 0 0 0-.231.11 40.784 40.784 0 0 0-1.8 3.697 54.075 54.075 0 0 0-16.235 0 37.384 37.384 0 0 0-1.827-3.697.228.228 0 0 0-.231-.11A58.388 58.388 0 0 0 11.08 4.898a.207.207 0 0 0-.095.082C1.578 18.817-.944 32.33.293 45.668a.244.244 0 0 0 .093.166 58.804 58.804 0 0 0 17.696 8.945.23.23 0 0 0 .249-.082 42.047 42.047 0 0 0 3.627-5.9.225.225 0 0 0-.123-.312 38.737 38.737 0 0 1-5.539-2.638.228.228 0 0 1-.022-.378 31.063 31.063 0 0 0 1.1-.862.22.22 0 0 1 .228-.031c11.62 5.305 24.198 5.305 35.681 0a.219.219 0 0 1 .23.029c.354.292.724.594 1.1.864a.228.228 0 0 1-.02.378 36.384 36.384 0 0 1-5.54 2.636.226.226 0 0 0-.12.314 47.249 47.249 0 0 0 3.624 5.897.225.225 0 0 0 .249.084 58.652 58.652 0 0 0 17.718-8.945.227.227 0 0 0 .092-.164c1.48-15.315-2.48-28.718-10.497-40.588a.179.179 0 0 0-.093-.084zM23.725 37.598c-3.498 0-6.38-3.212-6.38-7.156 0-3.944 2.827-7.156 6.38-7.156 3.583 0 6.438 3.24 6.382 7.156 0 3.944-2.827 7.156-6.382 7.156zm23.593 0c-3.498 0-6.38-3.212-6.38-7.156 0-3.944 2.826-7.156 6.38-7.156 3.582 0 6.437 3.24 6.38 7.156 0 3.944-2.798 7.156-6.38 7.156z"/></svg>
+        <span class="btn-txt">DISCORD</span>
+      </a>
+      <a class="hdr-btn donate-btn" href="#" onclick="showDonatePopup(event)" title="Support DevThemez">
+        ☕ <span class="btn-txt">DONATE</span>
+      </a>
     </div>
   </header>
 
@@ -360,6 +372,10 @@ header{flex-shrink:0;height:50px;padding:0 14px;border-bottom:1px solid #1e1e22;
       <div id="preview-tabs">
         <div class="ptab active" id="tab-mock"   onclick="switchTab('mock')">DEMO</div>
         <div class="ptab"        id="tab-custom" onclick="switchTab('custom')">MY DESIGN ✦</div>
+        <div class="tab-history-btns">
+          <button class="hdr-btn" id="undo-btn" onclick="undo()" disabled>↩ <span class="btn-txt">UNDO</span> <span class="hist-badge" id="undo-badge">0</span></button>
+          <button class="hdr-btn" id="redo-btn" onclick="redo()" disabled>↪ <span class="btn-txt">REDO</span> <span class="hist-badge" id="redo-badge">0</span></button>
+        </div>
       </div>
       <div id="mock-preview">
         <div class="preview-shell" id="preview-shell"></div>
@@ -1305,6 +1321,33 @@ document.addEventListener('pointerdown',e=>{
     _playSound('click');
   }
 },true);
+
+/* ════ DONATE POPUP ════ */
+function showDonatePopup(e){
+  e.preventDefault();
+  document.getElementById('donate-overlay').classList.add('open');
+  _playSound('modal');
+}
+function closeDonatePopup(){
+  document.getElementById('donate-overlay').classList.remove('open');
+}
+document.addEventListener('keydown',ev=>{
+  if(ev.key==='Escape'&&document.getElementById('donate-overlay').classList.contains('open'))closeDonatePopup();
+});
 </script>
+
+<!-- DONATE POPUP -->
+<div id="donate-overlay" onclick="if(event.target===this)closeDonatePopup()" style="position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);">
+  <div style="background:#141416;border:1px solid #2a2a2e;border-radius:18px;padding:30px 28px 24px;width:min(360px,92vw);box-shadow:0 24px 64px rgba(0,0,0,.95);animation:popIn .15s cubic-bezier(.34,1.4,.64,1) forwards;font-family:'JetBrains Mono',monospace;text-align:center;">
+    <div style="font-size:32px;margin-bottom:12px;">☕</div>
+    <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:8px;">Support DevThemez</div>
+    <div style="font-size:9px;color:#555;letter-spacing:.06em;line-height:1.8;margin-bottom:20px;">Buy Me a Coffee integration is<br><span style="color:#e2b714;font-weight:700;">coming soon!</span><br><br>If you're from <span style="color:#ff7a90;font-weight:700;">🇮🇳 India</span>, you can support directly<br>via DM on our Discord server.</div>
+    <a href="https://discord.gg/9W9HzMPb4" target="_blank" rel="noopener" onclick="closeDonatePopup()" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1a1a2e;border:1px solid #5865f2;color:#5865f2;border-radius:10px;padding:11px 16px;font-size:10px;font-weight:700;letter-spacing:.06em;text-decoration:none;margin-bottom:10px;transition:all .15s;font-family:'JetBrains Mono',monospace;" onmouseenter="this.style.background='#20204a'" onmouseleave="this.style.background='#1a1a2e'">
+      <svg width="14" height="14" viewBox="0 0 71 55" fill="currentColor"><path d="M60.105 4.898A58.55 58.55 0 0 0 45.653.415a.22.22 0 0 0-.231.11 40.784 40.784 0 0 0-1.8 3.697 54.075 54.075 0 0 0-16.235 0 37.384 37.384 0 0 0-1.827-3.697.228.228 0 0 0-.231-.11A58.388 58.388 0 0 0 11.08 4.898a.207.207 0 0 0-.095.082C1.578 18.817-.944 32.33.293 45.668a.244.244 0 0 0 .093.166 58.804 58.804 0 0 0 17.696 8.945.23.23 0 0 0 .249-.082 42.047 42.047 0 0 0 3.627-5.9.225.225 0 0 0-.123-.312 38.737 38.737 0 0 1-5.539-2.638.228.228 0 0 1-.022-.378 31.063 31.063 0 0 0 1.1-.862.22.22 0 0 1 .228-.031c11.62 5.305 24.198 5.305 35.681 0a.219.219 0 0 1 .23.029c.354.292.724.594 1.1.864a.228.228 0 0 1-.02.378 36.384 36.384 0 0 1-5.54 2.636.226.226 0 0 0-.12.314 47.249 47.249 0 0 0 3.624 5.897.225.225 0 0 0 .249.084 58.652 58.652 0 0 0 17.718-8.945.227.227 0 0 0 .092-.164c1.48-15.315-2.48-28.718-10.497-40.588a.179.179 0 0 0-.093-.084zM23.725 37.598c-3.498 0-6.38-3.212-6.38-7.156 0-3.944 2.827-7.156 6.38-7.156 3.583 0 6.438 3.24 6.382 7.156 0 3.944-2.827 7.156-6.382 7.156zm23.593 0c-3.498 0-6.38-3.212-6.38-7.156 0-3.944 2.826-7.156 6.38-7.156 3.582 0 6.437 3.24 6.38 7.156 0 3.944-2.798 7.156-6.38 7.156z"/></svg>
+      DM THE DEV ON DISCORD
+    </a>
+    <button onclick="closeDonatePopup()" style="width:100%;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#555;font-family:'JetBrains Mono',monospace;font-size:10px;cursor:pointer;transition:all .15s;" onmouseenter="this.style.color='#aaa'" onmouseleave="this.style.color='#555'">CLOSE</button>
+  </div>
+</div>
 </body>
 </html>
