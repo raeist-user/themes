@@ -52,6 +52,13 @@ header{flex-shrink:0;height:50px;padding:0 14px;border-bottom:1px solid #1e1e22;
 #preview-wrap{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden;}
 #preview-tabs{flex-shrink:0;display:flex;align-items:flex-end;padding:10px 12px 0;background:#0d0d0f;gap:2px;}
 .tab-history-btns{margin-left:auto;display:flex;gap:4px;padding-bottom:2px;align-items:center;}
+.tab-vdivider{width:1px;height:16px;background:#2a2a2e;margin:0 2px;}
+.tab-bar-btn{background:#141416!important;border-color:#2a2a2e!important;color:#888!important;font-size:9px!important;}
+.tab-bar-btn:hover:not(:disabled){border-color:#555!important;color:#ccc!important;background:#1c1c1f!important;}
+.tab-bar-btn:disabled{opacity:.35!important;}
+.export-tab-btn{background:#0f1a10!important;border-color:#2ecc71!important;color:#2ecc71!important;}
+.export-tab-btn:hover{background:#142418!important;border-color:#4ade80!important;color:#4ade80!important;}
+.export-tab-btn.ok{background:#0f1f0f!important;border-color:#2ecc71!important;color:#2ecc71!important;}
 .ptab{padding:6px 14px;font-size:9px;letter-spacing:.06em;cursor:pointer;border-radius:6px 6px 0 0;border:1px solid transparent;color:#444;transition:all .15s;user-select:none;}
 .ptab:hover{color:#888;}
 .ptab.active{color:#ddd;border-color:#2a2a2e;border-bottom-color:#141416;background:#141416;}
@@ -353,8 +360,6 @@ header{flex-shrink:0;height:50px;padding:0 14px;border-bottom:1px solid #1e1e22;
       <button class="hdr-btn" onclick="newProject()" title="Start fresh">✦ <span class="btn-txt new-btn-txt">NEW</span></button>
       <button class="hdr-btn accent" onclick="openProjects()">📁 <span class="btn-txt">PROJECTS</span></button>
       <div class="hdr-divider"></div>
-      <button class="hdr-btn" id="exp-btn" onclick="exportCSS()"><span id="exp-ico">⎘</span> <span id="exp-lbl">EXPORT</span></button>
-      <div class="hdr-divider"></div>
       <a class="hdr-btn discord-btn" href="https://discord.gg/9W9HzMPb4" target="_blank" rel="noopener" title="Join our Discord">
         <svg width="11" height="11" viewBox="0 0 71 55" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M60.105 4.898A58.55 58.55 0 0 0 45.653.415a.22.22 0 0 0-.231.11 40.784 40.784 0 0 0-1.8 3.697 54.075 54.075 0 0 0-16.235 0 37.384 37.384 0 0 0-1.827-3.697.228.228 0 0 0-.231-.11A58.388 58.388 0 0 0 11.08 4.898a.207.207 0 0 0-.095.082C1.578 18.817-.944 32.33.293 45.668a.244.244 0 0 0 .093.166 58.804 58.804 0 0 0 17.696 8.945.23.23 0 0 0 .249-.082 42.047 42.047 0 0 0 3.627-5.9.225.225 0 0 0-.123-.312 38.737 38.737 0 0 1-5.539-2.638.228.228 0 0 1-.022-.378 31.063 31.063 0 0 0 1.1-.862.22.22 0 0 1 .228-.031c11.62 5.305 24.198 5.305 35.681 0a.219.219 0 0 1 .23.029c.354.292.724.594 1.1.864a.228.228 0 0 1-.02.378 36.384 36.384 0 0 1-5.54 2.636.226.226 0 0 0-.12.314 47.249 47.249 0 0 0 3.624 5.897.225.225 0 0 0 .249.084 58.652 58.652 0 0 0 17.718-8.945.227.227 0 0 0 .092-.164c1.48-15.315-2.48-28.718-10.497-40.588a.179.179 0 0 0-.093-.084zM23.725 37.598c-3.498 0-6.38-3.212-6.38-7.156 0-3.944 2.827-7.156 6.38-7.156 3.583 0 6.438 3.24 6.382 7.156 0 3.944-2.827 7.156-6.382 7.156zm23.593 0c-3.498 0-6.38-3.212-6.38-7.156 0-3.944 2.826-7.156 6.38-7.156 3.582 0 6.437 3.24 6.38 7.156 0 3.944-2.798 7.156-6.38 7.156z"/></svg>
         <span class="btn-txt">DISCORD</span>
@@ -373,8 +378,10 @@ header{flex-shrink:0;height:50px;padding:0 14px;border-bottom:1px solid #1e1e22;
         <div class="ptab active" id="tab-mock"   onclick="switchTab('mock')">DEMO</div>
         <div class="ptab"        id="tab-custom" onclick="switchTab('custom')">MY DESIGN ✦</div>
         <div class="tab-history-btns">
-          <button class="hdr-btn" id="undo-btn" onclick="undo()" disabled>↩ <span class="btn-txt">UNDO</span> <span class="hist-badge" id="undo-badge">0</span></button>
-          <button class="hdr-btn" id="redo-btn" onclick="redo()" disabled>↪ <span class="btn-txt">REDO</span> <span class="hist-badge" id="redo-badge">0</span></button>
+          <button class="hdr-btn tab-bar-btn" id="undo-btn" onclick="undo()" disabled>↩ <span class="btn-txt">UNDO</span> <span class="hist-badge" id="undo-badge">0</span></button>
+          <button class="hdr-btn tab-bar-btn" id="redo-btn" onclick="redo()" disabled>↪ <span class="btn-txt">REDO</span> <span class="hist-badge" id="redo-badge">0</span></button>
+          <div class="tab-vdivider"></div>
+          <button class="hdr-btn tab-bar-btn export-tab-btn" id="exp-btn" onclick="exportCSS()"><span id="exp-ico">⎘</span> <span id="exp-lbl" class="btn-txt">EXPORT</span></button>
         </div>
       </div>
       <div id="mock-preview">
